@@ -1,0 +1,138 @@
+.content-container {
+  background-color: white;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+  margin-top: 30px;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: solid;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  width: 58%;
+}
+.header:hover {
+  text-decoration: underline;
+  color: blue;
+}
+.post {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 15px;
+}
+.post-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.username, .handle, .time {
+  margin: 0;
+  font-size: 14px;
+}
+.username {
+  font-weight: bold;
+}
+.handle, .time {
+  color: #71767b;
+}
+.post-img {
+  width: 100%;
+  margin-top: 10px;
+}
+.post-img img {
+  width: 100%;
+  border-radius: 16px;
+}
+.post-reactions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.post-reactions img {
+  width: 24px;
+  height: 24px;
+  margin: 20px;
+}
+.counter {
+  margin-top: 25px;
+  margin-right: 100px;
+}
+.creation {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom:solid grey ;
+}
+.creation-icons {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 50px;
+}
+.grey-post {
+  background-color:rgb(21, 169, 189);
+  color: rgb(250, 244, 244);
+  border-radius: 30px;
+  padding: 20px;
+  border:none;
+  font-weight: bold;
+  margin-right: 50px;
+  padding: 8px 16px;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+.tooltip-text {
+  visibility: hidden;
+  width: 100px; /* Adjust width as needed */
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: auto; /* Adjust width to fit content dynamically */
+  max-width: 150px;
+  z-index: 10;
+}
+.tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}

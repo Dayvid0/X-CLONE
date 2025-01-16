@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+        body {
+            background-color:white;
+            color: black;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        /* Left Sidebar */
+        .sidebar-left {
+            width: 275px;
+            padding-left: 12px;
+            padding-right: 12px;
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: black;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 4px 0;
+        }
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .nav-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 16px;
+        }
+        .post-button {
+            background-color: rgb(29, 155, 240);
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            padding: 16px 32px;
+            font-size: 17px;
+            font-weight: 700;
+            margin: 16px 0;
+            cursor: pointer;
+            width: 90%;
+        }
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            max-width: 600px;
+            border-left: 1px solid rgb(47, 51, 54);
+            border-right: 1px solid rgb(47, 51, 54);
+        }
+        .main-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgb(47, 51, 54);
+            position: sticky;
+            top: 0;
+            background-color:white;
+            backdrop-filter: blur(12px);
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .tab:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        /* Right Sidebar */
+        .sidebar-right {
+            width: 350px;
+            position: sticky;
+            justify-content: center;
+            top: 0;
+            height: 100vh;
+        }
+        .search-container {
+            position: sticky;
+            top: 0;
+            padding: 12px 0;
+            background-color:white;
+        }
+        .search-bar {
+            background-color:white;
+            border: solid;
+            border-radius: 9999px;
+            padding: 12px 16px;
+            width: 100%;
+            color:black;
+        }
+        .what-happening {
+            background-color: white;
+            border-radius: 16px;
+            margin-top: 16px;
+            padding: 16px;
+        }
+        .what-happening h2 {
+            margin-bottom: 12px;
+        }
+        .trending-item {
+            padding: 12px 0;
+            cursor: pointer;
+        }
+        .trending-item:hover {
+            background-color: white;
+        }
+        .trending-category {
+            font-size: 13px;
+            color: rgb(113, 118, 123);
+        }
+        .trending-text {
+            font-weight: 700;
+            margin: 4px 0;
+        }
+        .post-stats {
+            font-size: 13px;
+            color: rgb(113, 118, 123);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar-left">
+            <a href="#" class="nav-item">
+                <img src="icons/home.avif" alt="X Logo">
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/home.avif" alt="Home"> Home
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/explore ico.png" alt="Explore"> Explore
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/notification icon.jpg" alt="Notifications"> Notifications
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/message.png" alt="Messages"> Messages
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/grok.png" alt="Grok"> Grok
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/bookmark.png" alt="Bookmarks"> Bookmarks
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/x icon.png" alt="Premium"> Premium
+            </a>
+            <a href="#" class="nav-item">
+                <img src="icons/profile.png" alt="Profile"> Profile
+            </a>
+            <button class="post-button">Post</button>
+        </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="main-header">
+                <h2>Home</h2>
+                <div class="tabs">
+                    <div class="tab">For you</div>
+                    <div class="tab">Following</div>
+                    <div class="tab">Uncensored</div>
+                    <div class="tab">Insufferable</div>
+                </div>
+            </div>
+            <!-- Tweet content would go here -->
+        </main>
+        <!-- Right Sidebar -->
+        <div class="sidebar-right">
+            <div class="search-container">
+                <input type="search" class="search-bar" placeholder="Search">
+            </div>
+            <div class="what-happening">
+                <h2>What's happening</h2>
+                <div class="trending-item">
+                    <div class="trending-category">Trending in Uganda</div>
+                    <div class="trending-text">Shameless</div>
+                    <div class="post-stats">17.4K posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Sports · Trending</div>
+                    <div class="trending-text">Saka</div>
+                    <div class="post-stats">23k posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Sports · Trending</div>
+                    <div class="trending-text">Saka</div>
+                    <div class="post-stats">23k posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Sports · Trending</div>
+                    <div class="trending-text">Saka</div>
+                    <div class="post-stats">23k posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Sports · Trending</div>
+                    <div class="trending-text">Saka</div>
+                    <div class="post-stats">23k posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Sports · Trending</div>
+                    <div class="trending-text">Saka</div>
+                    <div class="post-stats">23k posts</div>
+                </div>
+                <!-- Add more trending items as needed -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

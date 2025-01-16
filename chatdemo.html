@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x.clone</title>
+  <style>
+    /* Main content container adjustments */
+    .main-content {
+      width: calc(100% - 550px);
+      margin-left: 275px;
+      padding: 16px;
+      min-height: 100vh;
+      position: relative;
+      background-color: white;
+    }
+    /* Fixed header styling */
+    .header {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid gray;
+      background-color: white;
+      position: fixed;
+      top: 0;
+      width: inherit;
+      z-index: 1000;
+    }
+    .header div {
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .header div:hover {
+      color: rgb(45, 194, 214);
+      text-decoration: underline;
+    }
+    /* Posts container adjustments */
+    .posts-container {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 275px;
+      height: 100vh;
+      background-color: white;
+      z-index: 1000;
+      padding: 8px 12px;
+      box-shadow: 10px 10px 20px 5px rgba(126, 122, 122, 0.5);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      padding-left: 70px;
+      padding-right: 70px;
+    }
+    .sidebar-2 {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 275px;
+      height: 100vh;
+      background-color: white;
+      z-index: 1000;
+      padding: 8px 18px;
+      box-shadow: -10px 10px 20px 5px rgba(126, 122, 122, 0.5);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      padding-left: 70px;
+    }
+    /* Post styles */
+    .post {
+      background-color: #dee9f3;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 12px;
+      width: calc(100% - 30px);
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #657786;
+    }
+    .profile-pic:hover {
+      width: 80px;
+      height: 80px;
+    }
+    .post-content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+    .post-footer {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 10px;
+      color: #8899a6;
+    }
+    .username {
+      color: grey;
+      font-size: 14px;
+    }
+    /* Sidebar component styles */
+    .sidebar > div {
+      padding: 12px 0px;
+      margin: 20px 0;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    .sidebar div:hover {
+      color: rgb(54, 225, 231);
+      text-decoration: underline;
+    }
+    .icons {
+      width: 24px;
+      height: 24px;
+      margin-right: 16px;
+      object-fit: contain;
+    }
+    .side-bar-txt {
+      font-size: 20px;
+      font-weight: 400;
+    }
+    /* Search and subscribe styles */
+    .search-bar {
+      border-radius: 20px;
+      padding: 10px;
+      width: 100%;
+      border: solid;
+      border-color: grey;
+    }
+    .subscribe-container {
+      border-style: solid;
+      border-radius: 20px;
+      padding: 5px;
+      border-color: gray;
+      font-weight: bold;
+    }
+    .subscribe-button {
+      background-color: rgb(12, 178, 233);
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      padding: 10px;
+      color: white;
+      cursor: pointer;
+    }
+    .subscribe-button:hover {
+      background-color: rgb(34, 85, 224);
+    }
+    /* Post button styles */
+    .post-button {
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      padding: 16px 32px;
+      font-size: 17px;
+      font-weight: 700;
+      width: 285px;
+      margin: 16px 0;
+      cursor: pointer;
+    }
+    .post-button:hover {
+      background-color: rgb(26, 140, 216);
+    }
+    /* Who to follow section */
+    .who-to-follow {
+      background-color: white;
+      color: black;
+      border-radius: 10px;
+      padding: 6px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      border: solid gray;
+    }
+    .follow-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+    }
+    .follow-button {
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .follow-button:hover {
+      background-color: white;
+      color: black;
+    }
+    /* Profile container styles */
+    .profile-container {
+      display: flex;
+      align-items: center;
+      margin-left: 5px;
+      cursor: pointer;
+      width: 285px;
+      border-style: solid;
+      border-color: grey;
+    }
+    .profile-image img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+    .profile-image img:hover {
+      width: 80px;
+      height: 80px;
+    }
+    /* Global styles */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background-color: white;
+      font-family: Arial, sans-serif;
+    }
+    .icon:hover {
+      color: #1da1f2;
+    }
+    /* What's happening section */
+    .happening-container {
+      border: solid;
+      border-color: grey;
+      padding-left: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .header.happening {
+      font-weight: bold;
+    }
+    /* Messages */
+    .messages {
+      margin-top: 0px;
+      color: rgb(29, 155, 240);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .messages:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <div>
+      <img src="icons/home.avif" class="icons"><span class="side-bar-txt">Home</span>
+    </div>
+    <div>
+      <div>
+        <img src="icons/explore-icon.png" class="icons"><span class="side-bar-txt">Explore</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/notification icon.jpg" class="icons"><span class="side-bar-txt">Notifications</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/message.png" class="icons"><span class="side-bar-txt">Messages</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/grok.png" class="icons"><span class="side-bar-txt">Grok</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/bookmark.png" class="icons"><span class="side-bar-txt">Bookmarks</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/jobs.png" class="icons"><span class="side-bar-txt">Jobs</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/community.jpg" class="icons"><span class="side-bar-txt">Communities</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/home.avif" class="icons"><span class="side-bar-txt">Premium</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/verified orgs.avif" class="icons"><span class="side-bar-txt">Verified Orgs</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/profile.png" class="icons"><span class="side-bar-txt">Profile</span>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img src="icons/more icon.jpg" class="icons"><span class="side-bar-txt">More</span>
+      </div>
+    </div>
+    <div>
+      <button class="post-button">Post</button>
+    </div>
+    <div class="profile-container">
+      <div class="profile-image">
+        <img src="channel-images/david.jpg" alt="Profile Picture">
+      </div>
+      <div class="profile-info">
+        <div class="username">
+          Ye's Son <span class="emoji">❄️💯</span>
+        </div>
+        <div class="handle">
+          @DayVid90794484
+          <span><img src="icons/more2.png" class="icons"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <div><p>Following</p></div>
+      <div><p>For You</p></div>
+      <div><p>Insufferable Women</p></div>
+      <div><p>Uncensored</p></div>
+    </div>
+    <div class="posts-container">
+      <!-- Posts will go here -->
+      <div class="post">
+        <div class="post-header">
+          <div>
+            <img src="channel-images/Ronaldo.jpg.webp" alt="Profile Picture" class="profile-pic">
+          </div>
+          <div>
+            <strong>Cristiano Ronaldo</strong> <span class="username">@Cristiano</span> <br>
+            <small>11h</small>
+          </div>
+        </div>
+        <div class="post-content">
+          <p>Best way to start the year 😜</p>
+          <img src="channel-images/cr7.webp" alt="Post image">
+        </div>
+        <div class="post-footer">
+          <span class="icon">💬 6.9K</span>
+          <span class="icon">🔁 22K</span>
+          <span class="icon">❤️ 322K</span>
+          <span class="icon">👁️ 40M</span>
+        </div>
+      </div>
+      <!-- Add more posts as needed -->
+    </div>
+  </div>
+  <!-- Right Sidebar -->
+  <div class="sidebar-2">
+    <div class="search-container">
+      <input type="search" placeholder="Search" class="search-bar">
+    </div>
+    <div class="subscribe-container">
+      <p class="para">Subscribe To Premium</p>
+      <p>Subscribe to unlock new features and if eligible, receive a share of revenue</p>
+      <button class="subscribe-button">Subscribe</button>
+    </div>
+    <div class="happening-container">
+      <p class="header">What's happening</p>
+      <div>
+        <p>Trending in Uganda</p>
+        <p style="font-weight: bold;">Shameless</p>
+        <p>18.1k posts</p>
+      </div>
+      <div>
+        <p>Sports Trending</p>
+        <p style="font-weight: bold;">Saka</p>
+        <p>39.9k posts</p>
+      </div>
+      <div>
+        <p>Trending in Uganda</p>
+        <p style="font-weight: bold;">Muhoozi</p>
+        <p>2,056 posts</p>
+      </div>
+      <div>
+        <p>Trending in Uganda</p>
+        <p style="font-weight: bold;">Mufumbiro</p>
+        <p>1,191 posts</p>
+      </div>
+      <div style="color: rgb(10, 190, 235);">Show more</div>
+    </div>
+    <div class="who-to-follow">
+      <div class="section-title">Who to follow</div>
+      <div class="follow-item">
+        <img src="channel-images/random.jpg" alt="e.l.f. Cosmetics" class="profile-pic">
+        <div class="profile-info">
+          <div class="name">
+            e.l.f. Cosmetics
+            <span class="verified">✓</span>
+          </div>
+          <div class="username">@elfcosmetics</div>
+        </div>
+        <button class="follow-button">Follow</button>
+      </div>
+      <!-- Add more follow items as needed -->
+    </div>
+  </div>
+</body>
+</html>
